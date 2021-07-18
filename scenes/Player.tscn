@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/tilesheet.png" type="Texture" id=1]
+[ext_resource path="res://scripts/PlayerMovement.gd" type="Script" id=2]
+[ext_resource path="res://assets/playerModel/axolotl1.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 45, 57, 15, 19 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 15, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 15, 0, 15, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 30, 0, 15, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 45, 0, 15, 16 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "walk",
+"speed": 12.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 6.0858
+height = 1.63496
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+script = ExtResource( 2 )
+
+[node name="BulletSpawn" type="Position2D" parent="."]
+position = Vector2( 8, 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+animation = "idle"
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0.705214, 1.0485 )
+shape = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
